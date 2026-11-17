@@ -1,6 +1,6 @@
 This is:
-- a simple bash script for automatically pushing changes in an Obsidian Vault to associated GitHub repo
-- a plint file for a LaunchAgent scheduled sync on macOS
+- a simple `bash` script for automatically pushing changes in an Obsidian Vault to associated GitHub repo
+- a `plint` file for a LaunchAgent scheduled sync on macOS
 
 This assumes:
 - Github CLI is used for authentication
@@ -19,3 +19,22 @@ If you want, you can also change how `PATH` is exported (it's all rather straigh
 Once it's ready, you can manually run the script (you may need to add execute permissions with `chmod 700`). 
 
 ### LaunchAgent
+Once you have downloaded the `plint` file, place it in `~/Library/LaunchAgents`. Then edit the file with appropriate values:
+- `Label`: only change its string value if you have renamed the file
+- `ProgramArguments`: edit the path to your `bash` script; note that the file expects a specific path format (starting with `/Users/`)
+- `RunAtLoad`: will run the script at the start of service (without interval); can be removed if you wish
+- `StartInterval`: by default the service will check for changes every 15mins (900s); change the value to change the interval
+- `StandardOutPath` and `StandardErrorPath`: outputs for logs and error logs, edit with your macOS username
+
+Assuming you've made all the required edits, you can then validate the `plint` file (replace with actual path and filename):
+`plutil -lint "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
+
+Register the service
+`launchctl bootstrap "gui/$(id -u)" \
+  "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
+
+The service should now run. You can check the status with `launchctl print "gui/$(id -u)/com.user.obsidian-sync-example"`; look for `state`, `runs` and `last exit code` to ensure everything fired up properly.
+
+To stop and unload the service, run `launchctl bootout "gui/$(id -u)/com.user.obsidian-sync-example"`. Note that any changes to `plist` file (such as changing the interval) requires unloading and starting the service up again.
+
+Note that `launchd` does not wake a sleeping macOS even if service was running before it went to sleep. The system must be active and service must be started. If system had been shutdown or restarted, the service must be started manually again.
