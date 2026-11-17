@@ -1,5 +1,5 @@
 ## What is it
-This is a simple `bash` script for automatically pushing changes in an Obsidian Vault to associated GitHub repo. Plus a `plint` file for a LaunchAgent scheduled sync on macOS
+This is a simple `bash` script for automatically pushing changes in an Obsidian Vault to associated GitHub repo. Plus a `plint` file for a LaunchAgent scheduled sync on macOS.
 
 It assumes:
 - Github CLI is used for authentication
@@ -26,9 +26,11 @@ Once you have downloaded the `plint` file, place it in `~/Library/LaunchAgents`.
 - `StandardOutPath` and `StandardErrorPath`: outputs for logs and error logs, edit with your macOS username
 
 Assuming you've made all the required edits, you can then validate the `plint` file (replace with actual path and filename):
+
 `plutil -lint "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
 
-Register the service
+Register the service:
+
 `launchctl bootstrap "gui/$(id -u)" \
   "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
 
