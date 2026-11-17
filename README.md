@@ -1,8 +1,7 @@
-This is:
-- a simple `bash` script for automatically pushing changes in an Obsidian Vault to associated GitHub repo
-- a `plint` file for a LaunchAgent scheduled sync on macOS
+## What is it
+This is a simple `bash` script for automatically pushing changes in an Obsidian Vault to associated GitHub repo. Plus a `plint` file for a LaunchAgent scheduled sync on macOS
 
-This assumes:
+It assumes:
 - Github CLI is used for authentication
 - the GitHub account you're planning on using already has login credentials saved locally (e.g. you've logged manually at least once)
 - the remote you're using for the Obsidian vault already exists (i.e. the repo for it has been created)
