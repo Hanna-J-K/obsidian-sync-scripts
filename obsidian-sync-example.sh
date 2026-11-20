@@ -5,9 +5,9 @@ set -uo pipefail
 
 # local config
 VAULT="absolute/path/to/obsidian/vault"
-PERSONAL_GH_USER="github_username"
+PERSONAL_GH_USER="GITHUB_USERNAME"
 BRANCH="main"
-EXPECTED_REMOTE="https://github.com/<github_username/<obsidian_vault_repository_name>.git"
+EXPECTED_REMOTE="https://github.com/GITHUB_USERNAME/REPOSITORY_NAME.git"
 
 # the exported variables are needed because launchd needs a fresh setup for individual shell config
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
