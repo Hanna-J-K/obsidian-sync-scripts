@@ -31,8 +31,7 @@ Assuming you've made all the required edits, you can then validate the `plint` f
 
 Register the service:
 
-`launchctl bootstrap "gui/$(id -u)" \
-  "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
+`launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.user.obsidian-sync-example.plist"`
 
 The service should now run. You can check the status with `launchctl print "gui/$(id -u)/com.user.obsidian-sync-example"`; look for `state`, `runs` and `last exit code` to ensure everything fired up properly.
 
