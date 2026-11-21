@@ -35,6 +35,6 @@ Register the service:
 
 The service should now run. You can check the status with `launchctl print "gui/$(id -u)/com.user.obsidian-sync-example"`; look for `state`, `runs` and `last exit code` to ensure everything fired up properly.
 
-To stop and unload the service, run `launchctl bootout "gui/$(id -u)/com.user.obsidian-sync-example"`. Note that any changes to `plist` file (such as changing the interval) requires unloading and starting the service up again.
+Note that the service won't run if the system is sleeping, but upon restart and login macOS will usually load the installed LaunchAgent again.
 
-Note that `launchd` does not wake a sleeping macOS even if service was running before it went to sleep. The system must be active and service must be started. If system had been shutdown or restarted, the service must be started manually again.
+To stop and unload the service, run `launchctl bootout "gui/$(id -u)/com.user.obsidian-sync-example"`. Note that any changes to `plist` file (such as changing the interval) requires unloading and starting the service up again for them to take effect.
